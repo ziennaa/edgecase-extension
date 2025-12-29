@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "edgecase",
+  "version": "0.1",
+  "description": "Save and organize LeetCode/Codeforces problems using custom tags, solve status, and smart reminders to revisit later.",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://codeforces.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leetcode.com/*",
+        "https://codeforces.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/bookmarks.png",
+        "assets/delete.png",
+        "assets/play.png"
+      ],
+      "matches": [
+        "https://leetcode.com/*",
+        "https://codeforces.com/*"
+      ]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/ext-icon.png",
+      "24": "assets/ext-icon.png",
+      "32": "assets/ext-icon.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "problem tracker"
+  }
+}
