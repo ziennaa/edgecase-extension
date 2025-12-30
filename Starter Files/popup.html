@@ -3,22 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>edgecase</title>
+    <title>EdgeCase</title>
     <link rel="stylesheet" href="popup.css" />
   </head>
 
   <body>
-    <div class="app">
-      <header class="header">
-        <div class="brand">
-          <div class="brand-title">EdgeCase</div>
-          <div class="brand-sub">Bookmarks for CF + LeetCode</div>
+    <div class="container">
+      <div class="header">
+        <div>
+          <h1 class="title">EdgeCase</h1>
+          <p class="subtitle">Bookmarks for CF + LeetCode</p>
         </div>
+      </div>
 
-        <input id="search" class="search" placeholder="Search title / tag…" />
-      </header>
+      <input id="search" class="search" placeholder="Search title / tag / status..." />
 
-      <main id="bookmarks" class="list"></main>
+      <div id="bookmarks" class="list"></div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="modalOverlay" class="overlay hidden"></div>
+    <div id="editModal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modalHeader">
+        <div class="modalTitle">Edit bookmark</div>
+        <button id="closeModal" class="iconBtn" title="Close">✕</button>
+      </div>
+
+      <div class="modalBody">
+        <label class="field">
+          <span>Status</span>
+          <select id="statusSelect">
+            <option value="unsolved">Unsolved</option>
+            <option value="revise">Revise</option>
+            <option value="solved">Solved</option>
+            <option value="didnt-understand">Didn’t understand</option>
+            <option value="__custom__">Custom…</option>
+            <label id="customStatusField" class="field hidden">
+                <span>Custom status</span>
+                <input id="customStatusInput" type="text" placeholder="e.g. stuck, brute-force, revisit-weekend" />
+              </label>
+              
+          </select>
+        </label>
+
+        <label class="field">
+          <span>Tags (comma separated)</span>
+          <input id="tagsInput" type="text" placeholder="dp, greedy, two pointers..." />
+        </label>
+      </div>
+
+      <div class="modalFooter">
+        <button id="saveEdit" class="btn primary">Save</button>
+        <button id="cancelEdit" class="btn ghost">Cancel</button>
+      </div>
     </div>
 
     <script src="popup.js"></script>
