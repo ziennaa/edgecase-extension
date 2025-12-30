@@ -1,4 +1,4 @@
-# EdgeCase Extension
+# edgecase Extension
 
 A lightweight Chrome/Edge extension that lets you **bookmark LeetCode + Codeforces problems** directly from the problem page, then manage them in a clean popup UI with **status**, **tags**, **company chips**, and **reminders**.
 
