@@ -46,7 +46,7 @@ A lightweight chrome extension that lets you **bookmark LeetCode + Codeforces pr
 - when clicked, it scrapes problem metadata (title, difficulty/status/tags, rating, etc.) and stores a record in `chrome.storage.local`.
 - `popup.html + popup.js` renders bookmarks and provides an edit modal to update tags/status/reminders.
 - company data is loaded from a local `companies_map.json` built from a public dataset.
-- source for companies dataset is public [ as per 2025 novemeber ](https://github.com/snehasishroy/leetcode-companywise-interview-questions)
+- source for companies dataset is public [ as per 2025 november ](https://github.com/snehasishroy/leetcode-companywise-interview-questions)
   
 ### screenshot - the blue plus icon is for adding it to popup!
 - <img width="200" height="300" alt="image" src="https://github.com/user-attachments/assets/d3d12b63-4f27-49de-96aa-d8091900f05b" />
@@ -94,7 +94,7 @@ if you want to regenerate mapping locally:
 
 ## why i built this?
 - i kept bookmarking in random places for leetcode and codeforces
-- somedays in leetcode, somedays in a doc,sometimes notion and sometimes even a notebook.
+- some days in leetcode, some days in a doc, sometimes notion and sometimes even a notebook.
 - it came to a point where it became a mess!
 -  when it came to revsion or keeping track, i had no clue what i had even solved or missed out on :(
 - so i made this bookmark
@@ -117,6 +117,7 @@ scripts/
   build_companies_map.mjs
 companies_map.json  # generated
 ```
+### [license](https://github.com/ziennaa/edgecase-extension/tree/main?tab=MIT-1-ov-file)
 ---
 ### limitations / known edgecases 
 - leetcode is a spa, so the conentent script re-run mounts using ```MutationObserver```
@@ -129,5 +130,7 @@ companies_map.json  # generated
 - not affiliated with dataset author. this project only uses it to build an offline companies map
 
 --- 
-### built by Manya Kalra [github](https://github.com/ziennaa)
+### built by [Manya Kalra](https://github.com/zienn)
+- if you liked it or it helped you make sure to give it a star!
+- feel free to reach out for any bugs/enhancements
 
