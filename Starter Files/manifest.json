@@ -14,7 +14,8 @@
         "https://leetcode.com/*",
         "https://codeforces.com/*"
       ],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_idle"
     }
   ],
   "background": {
@@ -28,7 +29,10 @@
         "assets/edit.png",
         "assets/play.png",
         "assets/save.png",
-        "assets/ext-icon.png"
+        "assets/ext-icon.png",
+        "assets/external-link.jpg",
+        "assets/open.jpg",
+        "assets/wen.png"
       ],
       "matches": [
         "https://leetcode.com/*",

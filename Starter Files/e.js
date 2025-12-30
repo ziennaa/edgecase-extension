@@ -34,6 +34,7 @@ function makeIcon(){
     img.addEventListener("error", ()=>{
         console.error("[edgecase] icon failed to load:", bookmarkImgURL);
     })
+    img.addEventListener("click")
     return img;
 }
 function mountOnCodeforces(){
@@ -80,7 +81,6 @@ function findVisibleTitleLike(regex){
     for(const el of els){
         const t = (el.textContent || "").trim();
         if(!regex.test(t)) continue;
-        const r = el.getBoundingClientRect();
         const r = el.getBoundingClientRect();
         if (r.top < 0 || r.top > 260) continue;
         if (r.width < 100 || r.height < 10) continue;

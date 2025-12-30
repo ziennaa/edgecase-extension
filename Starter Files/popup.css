@@ -1,0 +1,213 @@
+:root {
+    --bg: #0b1220;
+    --card: #0f1a2e;
+    --card2: #0c1628;
+    --text: #e8eefc;
+    --muted: rgba(232, 238, 252, 0.65);
+    --line: rgba(255, 255, 255, 0.08);
+    --accent: #4f8cff;
+    --danger: #ff5d5d;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body {
+    margin: 0;
+    background: radial-gradient(1000px 700px at 10% -10%, rgba(79,140,255,0.25), transparent 55%),
+                radial-gradient(900px 600px at 110% 10%, rgba(122,255,195,0.12), transparent 50%),
+                var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  }
+  
+  .app {
+    width: 360px;
+    height: 520px;
+    padding: 14px;
+  }
+  
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 12px;
+  }
+  
+  .brand-title {
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 0.2px;
+  }
+  
+  .brand-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  
+  .search {
+    width: 100%;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 12px;
+    outline: none;
+  }
+  
+  .search::placeholder { color: rgba(232,238,252,0.45); }
+  
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: auto;
+    height: calc(520px - 14px - 14px - 92px);
+    padding-right: 6px;
+  }
+  
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+  
+  .card:hover {
+    border-color: rgba(79,140,255,0.35);
+  }
+  
+  .row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .title-link {
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 750;
+    line-height: 1.15;
+    text-decoration: none;
+  }
+  
+  .title-link:hover {
+    text-decoration: underline;
+    text-decoration-color: rgba(79,140,255,0.6);
+  }
+  
+  .pill {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: rgba(232,238,252,0.75);
+    background: rgba(255,255,255,0.03);
+    white-space: nowrap;
+  }
+  
+  .meta {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .meta .dot::before {
+    content: "•";
+    margin: 0 6px;
+    color: rgba(232,238,252,0.35);
+  }
+  
+  .tags {
+    margin-top: 8px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  
+  .tagchip {
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.03);
+    color: rgba(232,238,252,0.72);
+  }
+  
+  .actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+  
+  .btn {
+    border: 1px solid var(--line);
+    background: rgba(20, 199, 145, 0.04);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 12px;
+  }
+  
+  .btn:hover { border-color: rgba(255,255,255,0.18); }
+  
+  .btn-danger {
+    border-color: rgba(255,93,93,0.35);
+    background: rgba(255,93,93,0.10);
+    color: #ffd1d1;
+  }
+  
+  .icon-btn {
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    padding: 8px;
+    cursor: pointer;
+    flex: none;
+    height: 36px;
+    width: 36px;
+    display: grid;
+    place-items: center;
+  }
+  
+  .icon-btn:hover { border-color: rgba(79,140,255,0.35); }
+  
+  .icon-btn img {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+  /* ---- Scrollbar (Chromium + Firefox) ---- */
+.list {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(232,238,252,0.22) rgba(255,255,255,0.04);
+}
+
+.list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.03);
+  border-radius: 999px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: rgba(232,238,252,0.18);
+  border: 2px solid rgba(255,255,255,0.03); /* makes it look inset */
+  border-radius: 999px;
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+  background: rgba(232,238,252,0.28);
+}

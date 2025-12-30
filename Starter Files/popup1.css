@@ -1,0 +1,114 @@
+:root {
+    --bg: #0b0f14;
+    --card: #121826;
+    --text: #e6edf3;
+    --muted: #9aa4b2;
+    --border: rgba(255,255,255,0.08);
+    --btn: #1f6feb;
+    --btn2: rgba(255,255,255,0.10);
+    --danger: #ef4444;
+  }
+  
+  * { box-sizing: border-box; }
+  
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+  
+  .container {
+    width: 360px;
+    padding: 12px;
+  }
+  
+  .title {
+    margin: 4px 0 12px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+  }
+  
+  .empty {
+    padding: 12px;
+    color: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+  }
+  
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .titleRow {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .cardTitle {
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.2;
+    max-width: 260px;
+    word-break: break-word;
+  }
+  
+  .badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  
+  .meta {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    word-break: break-word;
+  }
+  
+  .tags {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  
+  .actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+  }
+  
+  .btn {
+    flex: 1;
+    border: 0;
+    padding: 8px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: var(--btn);
+    color: white;
+    font-weight: 650;
+    font-size: 12px;
+  }
+  
+  .btn.secondary {
+    background: var(--btn2);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  
+  .btn.danger {
+    background: rgba(239, 68, 68, 0.20);
+    color: #fecaca;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+  }
+  
