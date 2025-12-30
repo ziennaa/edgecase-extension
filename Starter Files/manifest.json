@@ -23,16 +23,20 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "assets/bookmarks.png",
+        "assets/bookmark.png",
         "assets/delete.png",
-        "assets/play.png"
+        "assets/edit.png",
+        "assets/play.png",
+        "assets/save.png",
+        "assets/ext-icon.png"
       ],
       "matches": [
         "https://leetcode.com/*",
         "https://codeforces.com/*"
       ]
     }
-  ],
+  ]
+  ,
   "action": {
     "default_icon": {
       "16": "assets/ext-icon.png",

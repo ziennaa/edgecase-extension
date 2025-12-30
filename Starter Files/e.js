@@ -1,15 +1,3 @@
-// content.js
-// Author:
-// Author URI: https://
-// Author Github URI: https://www.github.com/
-// Project Repository URI: https://github.com/
-// Description: Handles all the webpage level activities (e.g. manipulating page data, etc.)
-// License: MIT
-// content.js
-// content.js
-// content.js
-// content.js
-// content.js
 const ICON_ID = "add-bookmark-button";
 const bookmarkImgURL = chrome.runtime.getURL("assets/bookmark.png");
 console.log("[edgecase] content.js loaded on:", location.href);
@@ -20,8 +8,8 @@ function boot(){
     obs.observe(document.documentElement, { childList: true, subtree: true});
 }
 function mount(){
-    if (document.getElementById(ICON_ID)) return;
-    if (location.hostname.includes("codeforces.com")){
+    if(document.getElementsById(ICON_ID)) return;
+    if(location.hostname.includes("codeforces.com")){
     mountOnCodeforces();
     }else if(location.hostname.includes("leetcode.com")){
         mountOnLeetCode();
@@ -92,7 +80,7 @@ function findVisibleTitleLike(regex){
     for(const el of els){
         const t = (el.textContent || "").trim();
         if(!regex.test(t)) continue;
-
+        const r = el.getBoundingClientRect();
         const r = el.getBoundingClientRect();
         if (r.top < 0 || r.top > 260) continue;
         if (r.width < 100 || r.height < 10) continue;
