@@ -3,7 +3,7 @@
   "name": "edgecase",
   "version": "0.1",
   "description": "Save and organize LeetCode/Codeforces problems using custom tags, solve status, and smart reminders to revisit later.",
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage", "alarms", "notifications", "tabs"],
   "host_permissions": [
     "https://leetcode.com/*",
     "https://codeforces.com/*"

@@ -38,19 +38,31 @@
             <option value="solved">Solved</option>
             <option value="didnt-understand">Didn’t understand</option>
             <option value="__custom__">Custom…</option>
-            <label id="customStatusField" class="field hidden">
-                <span>Custom status</span>
-                <input id="customStatusInput" type="text" placeholder="e.g. stuck, brute-force, revisit-weekend" />
-              </label>
-              
           </select>
         </label>
-
+      
+        <label id="customStatusField" class="field hidden">
+          <span>Custom status</span>
+          <input id="customStatusInput" type="text" placeholder="e.g. stuck, brute-force, revisit-weekend" />
+        </label>
+      
+        <label class="field">
+          <span>Remind me in</span>
+          <select id="remindSelect">
+            <option value="">No reminder</option>
+            <option value="1">1 day</option>
+            <option value="3">3 days</option>
+            <option value="7">7 days</option>
+            <option value="14">14 days</option>
+          </select>
+        </label>
+      
         <label class="field">
           <span>Tags (comma separated)</span>
           <input id="tagsInput" type="text" placeholder="dp, greedy, two pointers..." />
         </label>
       </div>
+      
 
       <div class="modalFooter">
         <button id="saveEdit" class="btn primary">Save</button>

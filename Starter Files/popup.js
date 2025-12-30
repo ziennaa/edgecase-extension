@@ -1,3 +1,4 @@
+
 const store = {
     get: (key) => new Promise((resolve) => chrome.storage.local.get(key, resolve)),
     set: (obj) => new Promise((resolve) => chrome.storage.local.set(obj, resolve)),
@@ -13,6 +14,7 @@ const store = {
     saveEdit: document.getElementById("saveEdit"),
     statusSelect: document.getElementById("statusSelect"),
     tagsInput: document.getElementById("tagsInput"),
+    remindSelect: document.getElementById("remindSelect"),
   };
   
   let allEntries = [];     // [{key, record}]
@@ -204,6 +206,15 @@ function normStatus(s) {
   
     els.overlay.classList.remove("hidden");
     els.modal.classList.remove("hidden");
+    const now = Date.now();
+const at = record.remindAt;
+if (typeof at === "number" && at > now) {
+  const days = Math.round((at - now) / 86400000);
+  els.remindSelect.value = ["1","3","7","14"].includes(String(days)) ? String(days) : "";
+} else {
+  els.remindSelect.value = "";
+}
+
   }
   
   
@@ -214,36 +225,47 @@ function normStatus(s) {
   }
   
   async function saveEdit() {
-    if (!editingKey) return;
+    try {
+      if (!editingKey) return;
   
-    let status = els.statusSelect.value;
+      let status = els.statusSelect.value;
+      if (status === "__custom__") {
+        status = normStatus(customInput.value);
+        if (!status) status = "unsolved";
+      }
   
-    if (status === "__custom__") {
-      status = normStatus(customInput.value);
-      if (!status) status = "unsolved"; // fallback if empty
+      const tags = els.tagsInput.value
+        .split(",")
+        .map(s => s.trim())
+        .filter(Boolean);
+  
+      const remindDays = els.remindSelect.value;
+      let remindAt = null;
+      if (remindDays) remindAt = Date.now() + Number(remindDays) * 86400000;
+  
+      const res = await store.get("bookmarks");
+      const map = res.bookmarks || {};
+      const existing = map[editingKey];
+      if (!existing) return closeEdit();
+  
+      map[editingKey] = {
+        ...existing,
+        status,
+        tags,
+        companies: Array.isArray(existing.companies) ? existing.companies : [],
+        remindAt,
+        updatedAt: Date.now(),
+      };
+  
+      await store.set({ bookmarks: map });
+      closeEdit();
+      await refresh();
+    } catch (err) {
+      console.error("[edgecase] saveEdit failed:", err);
     }
-  
-    const tags = els.tagsInput.value
-      .split(",")
-      .map(s => s.trim())
-      .filter(Boolean);
-  
-    const res = await store.get("bookmarks");
-    const map = res.bookmarks || {};
-    const existing = map[editingKey];
-    if (!existing) return closeEdit();
-  
-    map[editingKey] = {
-      ...existing,
-      status,
-      tags,
-      updatedAt: Date.now(),
-    };
-  
-    await store.set({ bookmarks: map });
-    closeEdit();
-    await refresh();
   }
+  
+  
   
   
   function statusColor(s) {
