@@ -1,8 +1,16 @@
+# Windows junk
+Thumbs.db
+Desktop.ini
+
+
 # macOS system files
 **/.DS_Store
 
+
 # Log files
 *.log
+data/companywise/
+companies_map.json
 
 # Build output 
 dist/

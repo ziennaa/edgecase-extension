@@ -1,0 +1,12 @@
+# datasets / cloned repos / generated data
+data/
+scripts/
+companies_map.json
+
+# env + OS junk
+.env
+.env.local
+*.log
+**/.DS_Store
+Thumbs.db
+Desktop.ini

@@ -32,7 +32,8 @@
         "assets/ext-icon.png",
         "assets/external-link.jpg",
         "assets/open.jpg",
-        "assets/wen.png"
+        "assets/wen.png",
+        "companies_map.json"
       ],
       "matches": [
         "https://leetcode.com/*",

@@ -1,4 +1,26 @@
 // content.js
+let companiesData = null;
+let companiesLoadPromise = null;
+
+function ensureCompaniesLoaded() {
+  if (companiesLoadPromise) return companiesLoadPromise;
+
+  const url = chrome.runtime.getURL("companies_map.json");
+  companiesLoadPromise = fetch(url)
+    .then((r) => r.ok ? r.json() : Promise.reject(new Error(`HTTP ${r.status}`)))
+    .then((j) => {
+      companiesData = j;
+      return j;
+    })
+    .catch((err) => {
+      console.warn("[edgecase] companies_map.json not loaded:", err);
+      companiesData = { map: {} };
+      return companiesData;
+    });
+
+  return companiesLoadPromise;
+}
+
 const ICON_ID = "add-bookmark-button";
 const bookmarkImgURL = chrome.runtime.getURL("assets/bookmark.png");
 
@@ -82,6 +104,10 @@ async function handleBookmarkClick(e) {
     );
     return;
   }
+  if (location.hostname.includes("leetcode.com")) {
+    await ensureCompaniesLoaded();
+  }
+  
 
   const data = collectProblemData();
   if (!data) {
@@ -106,12 +132,15 @@ try {
   const bookmarks = res.bookmarks || {};
 
   const existing = bookmarks[data.key] || {};
-
   // IMPORTANT:
   // - do NOT wipe user's custom tags/status when clicking bookmark again
   // - union tags (existing + scraped)
   const mergedTags = uniqStrings([...(existing.tags || []), ...(data.tags || [])]);
-
+  const mergedCompanies = uniqStrings([
+    ...(existing.companies || []),
+    ...(data.companies || []),
+  ]);
+  
   const record = {
     ...existing,
     ...data,
@@ -123,7 +152,7 @@ try {
         : data.status || "unknown",
 
     tags: mergedTags,
-
+    companies: mergedCompanies,
     // don't overwrite good values with null
     difficulty: data.difficulty || existing.difficulty || null,
     rating: data.rating ?? existing.rating ?? null,
@@ -181,6 +210,9 @@ function collectLeetCodeData() {
   const m = location.pathname.match(/^\/problems\/([^/]+)/);
   if (!m) return null;
   const slug = m[1];
+  const companies = Array.isArray(companiesData?.map?.[slug])
+  ? companiesData.map[slug]
+  : [];
 
   const rawTitle = (getLeetCodeTitle()?.textContent || "").trim();
   const titleFromDom = rawTitle.replace(/^\s*\d+\.\s+/, "").trim();
@@ -204,6 +236,7 @@ function collectLeetCodeData() {
     difficulty: difficulty || null,
     status,
     tags,
+    companies,
   };
 }
 

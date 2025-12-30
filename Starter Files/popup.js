@@ -69,14 +69,23 @@ function normStatus(s) {
     const q = (els.search.value || "").trim().toLowerCase();
   
     const filtered = !q
-      ? allEntries
-      : allEntries.filter(({ record }) => {
-          const title = (record.title || "").toLowerCase();
-          const status = (record.status || "").toLowerCase();
-          const tags = (record.tags || []).join(" ").toLowerCase();
-          const site = (record.site || "").toLowerCase();
-          return title.includes(q) || tags.includes(q) || status.includes(q) || site.includes(q);
-        });
+  ? allEntries
+  : allEntries.filter(({ record }) => {
+      const title = (record.title || "").toLowerCase();
+      const status = (record.status || "").toLowerCase();
+      const tags = (record.tags || []).join(" ").toLowerCase();
+      const companies = (record.companies || []).join(" ").toLowerCase();
+      const site = (record.site || "").toLowerCase();
+
+      return (
+        title.includes(q) ||
+        tags.includes(q) ||
+        companies.includes(q) ||
+        status.includes(q) ||
+        site.includes(q)
+      );
+    });
+
   
     els.list.innerHTML = filtered.map(renderCard).join("");
   
@@ -84,20 +93,84 @@ function normStatus(s) {
       els.list.innerHTML = `<div style="color: rgba(232,238,252,0.65); padding: 10px 6px;">No bookmarks found.</div>`;
     }
   }
+//function renderCard({ key, record }) {
+//  const site = (record.site || "unknown").toUpperCase();
+//  const title = escapeHtml(record.title || "Untitled");
+//  const status = record.status || "unknown";
+//
+//  const meta = buildMeta(record);
+//
+//  const tags = Array.isArray(record.tags) ? record.tags : [];
+//  const tagsHtml = tags.length
+//    ? tags.slice(0, 6).map(t =>
+//        `<button type="button" class="tagchip" data-action="filterTag" data-tag="${escapeAttr(t)}">${escapeHtml(t)}</button>`
+//      ).join("")
+//    : `<span class="tagchip">Tags: —</span>`;
+//
+//  const companies = Array.isArray(record.companies) ? record.companies : [];
+//  const companiesHtml = companies.length
+//    ? companies.slice(0, 6).map(c =>
+//        `<button type="button" class="tagchip companychip" data-action="filterCompany" data-company="${escapeAttr(c)}">${escapeHtml(c)}</button>`
+//      ).join("")
+//      + (companies.length > 6 ? `<span class="tagchip companychip">+${companies.length - 6}</span>` : "")
+//    : "";
+//
+//  const dotColor = statusColor(status);
+//
+//  return `
+//    <div class="card" data-key="${escapeAttr(key)}">
+//      <div class="cardTop">
+//        <div style="min-width:0;">
+//          <h2 class="cardTitle">${title}</h2>
+//          <div class="meta">
+//            <span class="statusDot" style="background:${dotColor};"></span>
+//            <span>${escapeHtml(prettyStatus(status))}</span>
+//            <span> • </span>
+//            <span>${escapeHtml(meta)}</span>
+//          </div>
+//
+//          <div class="tagsRow">${tagsHtml}</div>
+//          ${companiesHtml ? `<div class="tagsRow">${companiesHtml}</div>` : ""}
+//        </div>
+//
+//        <div class="pills">
+//          <span class="pill">${site}</span>
+//          <button class="openBtn" data-action="open" title="Open">
+//            ${externalLinkSvg()}
+//          </button>
+//        </div>
+//      </div>
+//
+//      <div class="actions">
+//        <button class="btn" data-action="edit">Edit</button>
+//        <button class="btn danger" data-action="delete">Delete</button>
+//      </div>
+//    </div>
+//  `;
+//}
+  
   
   function renderCard({ key, record }) {
-    const site = (record.site || "unknown").toUpperCase();
+    const siteLabel = (record.site || "unknown").toUpperCase();
     const title = escapeHtml(record.title || "Untitled");
     const status = record.status || "unknown";
   
     const meta = buildMeta(record);
-    const tags = Array.isArray(record.tags) ? record.tags : [];
-    const tagsHtml = tags.length
-  ? tags.slice(0, 6).map(t =>
-      `<button type="button" class="tagchip" data-action="filterTag" data-tag="${escapeAttr(t)}">${escapeHtml(t)}</button>`
-    ).join("")
-  : `<span class="tagchip">Tags: —</span>`;
-
+  
+    const tagsArr = Array.isArray(record.tags) ? record.tags : [];
+    const tagsHtml = tagsArr.length
+      ? tagsArr.slice(0, 6).map(t =>
+          `<button type="button" class="tagchip" data-action="filterTag" data-tag="${escapeAttr(t)}">${escapeHtml(t)}</button>`
+        ).join("")
+      : `<span class="tagchip">Tags: —</span>`;
+  
+    const companiesArr = Array.isArray(record.companies) ? record.companies : [];
+    const companiesHtml = companiesArr.length
+      ? companiesArr.slice(0, 6).map(c =>
+          `<button type="button" class="tagchip companychip" data-action="filterCompany" data-company="${escapeAttr(c)}">${escapeHtml(c)}</button>`
+        ).join("") +
+        (companiesArr.length > 6 ? `<span class="tagchip companychip">+${companiesArr.length - 6}</span>` : "")
+      : "";
   
     const dotColor = statusColor(status);
   
@@ -112,11 +185,13 @@ function normStatus(s) {
               <span> • </span>
               <span>${escapeHtml(meta)}</span>
             </div>
+  
             <div class="tagsRow">${tagsHtml}</div>
+            ${companiesHtml ? `<div class="tagsRow">${companiesHtml}</div>` : ""}
           </div>
   
           <div class="pills">
-            <span class="pill">${site}</span>
+            <span class="pill">${siteLabel}</span>
             <button class="openBtn" data-action="open" title="Open">
               ${externalLinkSvg()}
             </button>
@@ -130,6 +205,7 @@ function normStatus(s) {
       </div>
     `;
   }
+  
   
   function buildMeta(r) {
     if (r.site === "leetcode") {
@@ -159,6 +235,12 @@ function normStatus(s) {
     if (action === "filterTag") {
         const tag = btn.getAttribute("data-tag") || "";
         els.search.value = tag;
+        render();
+        return;
+      }
+      if (action === "filterCompany") {
+        const c = btn.getAttribute("data-company") || "";
+        els.search.value = c;
         render();
         return;
       }
