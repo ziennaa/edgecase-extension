@@ -130,7 +130,7 @@ companies_map.json  # generated
 - not affiliated with dataset author. this project only uses it to build an offline companies map
 
 --- 
-### built by [Manya Kalra](https://github.com/zienn)
+### built by [Manya Kalra](https://github.com/ziennaa)
 - if you liked it or it helped you make sure to give it a star!
 - feel free to reach out for any bugs/enhancements
 
