@@ -1,7 +1,7 @@
 # datasets / cloned repos / generated data
 data/
 scripts/
-companies_map.json
+data/companywise/
 
 # env + OS junk
 .env

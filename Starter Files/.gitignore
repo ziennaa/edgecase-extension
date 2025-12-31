@@ -10,7 +10,7 @@ Desktop.ini
 # Log files
 *.log
 data/companywise/
-companies_map.json
+
 
 # Build output 
 dist/
